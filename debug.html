@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Font Ruler</title>
+    <meta name="Description" content="Measure font ascent and descent height">
+    <meta name="Keywords" content="css, font, ascent, descent, tool, online, dimensions, size">
+    <style>
+        #paragraphTarget, #paragraphPreview {
+            margin: 0;
+        }
+
+        #paragraphTarget {
+            background-color: black;
+            color: white;
+            width: 1em;
+        }
+
+        #paragraphPreview {
+            background-color: #eee;
+            color: black;
+        }
+
+
+        #fieldsetPreview:before,
+        #fieldsetPreview:after {
+            content: '';
+            display: block;
+            background:rgba(0, 0, 0, 0.125);
+            height:40px;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Font Ruler <small>Measure font ascent and descent height</small></h1>
+    </header>
+
+    <form id="formSettings">
+        <fieldset>
+            <legend>Settings</legend>
+
+            <label for="selectFontWeight">Font weight</label>
+            <select id="selectFontWeight"  tabindex="4">
+                <option value="bold">bold</option>
+                <option value="bolder">bolder</option>
+                <option value="lighter">lighter</option>
+                <option value="normal" selected>normal</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+            </select>
+
+            <label for="inputFontSize">Font size</label>
+            <input type="text" id="inputFontSize" value="16px" placeholder="16px" tabindex="1" autofocus required>
+
+            <label for="inputLineHeight">Line height</label>
+            <input type="text" id="inputLineHeight" value="1.4" placeholder="1.4" tabindex="2" required>
+
+            <label for="inputFontFamily">Font family</label>
+            <input list="datalistFontFamilies" type="text" id="inputFontFamily" value="Arial" placeholder="Arial" tabindex="3" required>
+
+            <input type="submit" value="Submit"  tabindex="5">
+
+        </fieldset>
+    </form>
+
+    <fieldset id="fieldsetResult">
+        <legend>Result</legend>
+
+        <label for="outputMarginLeft">Margin left</label>
+        <output id="outputMarginLeft">-1px</output>
+
+        <label for="outputMarginTop">Margin top</label>
+        <output id="outputMarginTop">-18px</output>
+
+        <label for="outputMarginBottom">Margin bottom</label>
+        <output id="outputMarginBottom">-18px</output>
+    </fieldset>
+
+    <fieldset id="fieldsetPreview">
+        <legend>Preview</legend>
+        <p id="paragraphPreview">Preview</p>
+    </fieldset>
+
+    <fieldset id="fieldsetHtml">
+        <legend>HTML</legend>
+        <p id="paragraphTarget">E</p>
+    </fieldset>
+
+    <fieldset id="fieldsetCanvas">
+        <legend>Canvas</legend>
+    </fieldset>
+
+    <article>
+        <p>There is <a href="#targetParagraph">target paragraph</a> wich is rendered to <a href="#fieldsetCanvas">canvas</a> with applied <a href="#formSettings">settings</a> (<a href="http://html2canvas.hertzen.com/" target="_blank">html2canvas</a> library used).</p>
+        <p>After rendering canvas we iterating through all points looking for mininum and maximum coordinates where colors are changed from black to white.</p>
+        <p>After that we can calculate ascend and descend sizes for current font.</p>
+        <p><a href="render-html-to-canvas.html">Example of rendering html into canvas</a> and <a href="canvas-get-point-color.html">finding point color</a></p>
+        <p><a href="fontruler.html">Font ruler</a> without form and its <a href="fontruler.js">source</a>.</p>
+    </article>
+
+    <datalist id="datalistFontFamilies">
+        <option value="Andale Mono">
+        <option value="Arial">
+        <option value="Arial Black">
+        <option value="Arial Narrow">
+        <option value="Arial Rounded MT Bold">
+        <option value="Avant Garde">
+        <option value="Baskerville">
+        <option value="Big Caslon">
+        <option value="Bodoni MT">
+        <option value="Book Antiqua">
+        <option value="Bookman">
+        <option value="Brush Script MT">
+        <option value="Calibri">
+        <option value="Calisto MT">
+        <option value="Cambria">
+        <option value="Candara">
+        <option value="Century Gothic">
+        <option value="Charcoal">
+        <option value="Comic Sans MS">
+        <option value="Consolas">
+        <option value="Copperplate">
+        <option value="Courier">
+        <option value="Courier New">
+        <option value="cursive">
+        <option value="Didot">
+        <option value="Franklin Gothic Medium">
+        <option value="Futura">
+        <option value="Gadget">
+        <option value="Garamond">
+        <option value="Geneva">
+        <option value="Georgia">
+        <option value="Gill Sans">
+        <option value="Goudy Old Style">
+        <option value="Helvetica">
+        <option value="Hoefler Text">
+        <option value="Impact">
+        <option value="Lucida Bright">
+        <option value="Lucida Console">
+        <option value="Lucida Grande">
+        <option value="Lucida Sans Typewriter">
+        <option value="Lucida Sans Unicode">
+        <option value="Monaco">
+        <option value="monospace">
+        <option value="MS Sans Serif">
+        <option value="MS Serif">
+        <option value="New York">
+        <option value="Optima">
+        <option value="Palatino">
+        <option value="Palatino Linotype">
+        <option value="Papyrus">
+        <option value="Perpetua">
+        <option value="Rockwell">
+        <option value="Rockwell Extra Bold">
+        <option value="sans-serif">
+        <option value="Segoe UI">
+        <option value="serif">
+        <option value="Symbol">
+        <option value="Tahoma">
+        <option value="Times">
+        <option value="Times New Roman">
+        <option value="Trebuchet MS">
+        <option value="Verdana">
+    </datalist>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="fontruler.js"></script>
+    <script>
+        var formSettings = document.getElementById('formSettings'),
+            selectFontWeight = document.getElementById('selectFontWeight'),
+            inputFontSize = document.getElementById('inputFontSize'),
+            inputLineHeight = document.getElementById('inputLineHeight'),
+            inputFontFamily = document.getElementById('inputFontFamily'),
+            paragraphTarget = document.getElementById('paragraphTarget'),
+            paragraphPreview = document.getElementById('paragraphPreview'),
+            datalistFontFamilies = document.getElementById('datalistFontFamilies'),
+            key = 'AIzaSyAgaE5PTKLozvjkyseLxKdQfxRTtrGxbnQ',
+            googleFonts = [];
+
+        // Retrieve Google Web Fonts and append them to font family input data list
+        request = new XMLHttpRequest();
+        request.open('GET', 'https://www.googleapis.com/webfonts/v1/webfonts?fields=items%2Ffamily&key=' + key, true);
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400){
+                data = JSON.parse(request.responseText);
+
+                googleFonts = data.items.map(function(item){
+                    return item.family;
+                });
+
+                datalistFontFamilies.innerHTML += googleFonts.map(function(font){
+                    return '<option value="' + font + '">';
+                }).join('');
+            }
+        };
+        request.send();
+
+        // Whenever user inputs one of google fonts - load it
+        inputFontFamily.addEventListener('input', function(){
+            if(googleFonts.indexOf(this.value) > -1) {
+                WebFont.load({google: {families: [this.value]}});
+            }
+        });
+
+
+        formSettings.addEventListener('submit', function(event){
+            event.preventDefault();
+            main();
+        });
+
+        // Main function
+        function main() {
+            // Update target paragraph styles
+            paragraphTarget.style.fontWeight = selectFontWeight.value;
+            paragraphTarget.style.fontSize = inputFontSize.value;
+            paragraphTarget.style.lineHeight = inputLineHeight.value;
+            paragraphTarget.style.fontFamily = inputFontFamily.value;
+
+            // Update preview paragraph styles
+            paragraphPreview.style.fontWeight = selectFontWeight.value;
+            paragraphPreview.style.fontSize = inputFontSize.value;
+            paragraphPreview.style.lineHeight = inputLineHeight.value;
+            paragraphPreview.style.fontFamily = inputFontFamily.value;
+
+            // Render target paragraph to canvas
+            fontruler(paragraphTarget, function(minX, minY, maxX, maxY, marginLeft, marginTop, marginBottom, canvas){
+                // Show rendered canvas
+                document.getElementById('fieldsetCanvas').innerHTML = '<legend>Canvas</legend>';
+                document.getElementById('fieldsetCanvas').appendChild(canvas);
+
+                // Update output results
+                document.getElementById('outputMarginLeft').innerHTML = marginLeft + 'px';
+                document.getElementById('outputMarginTop').innerHTML = marginTop + 'px';
+                document.getElementById('outputMarginBottom').innerHTML = marginBottom + 'px';
+
+                // Update preview paragraph styles
+                paragraphPreview.style.marginLeft = marginLeft + 'px';
+                paragraphPreview.style.marginTop = marginTop + 'px';
+                paragraphPreview.style.marginBottom = marginBottom + 'px';
+
+                console.table([{
+                    'min x (px)': minX,
+                    'min y (px)': minY,
+                    'max x (px)': maxX,
+                    'max y (px)': maxY,
+                    'margin left (px)': marginLeft,
+                    'margin top (px)': marginTop,
+                    'margin bottom (px)': marginBottom
+                }]);
+            });
+        }
+
+        main();
+    </script>
+</body>
+</html>

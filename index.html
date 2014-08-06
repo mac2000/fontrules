@@ -2,111 +2,162 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Font Ruler</title>
-    <meta name="Description" content="Measure font ascent and descent height">
-    <meta name="Keywords" content="css, font, ascent, descent, tool, online, dimensions, size">
+    <title>Flex</title>
     <style>
-        #paragraphTarget, #paragraphPreview {
+        html {
+            font-family: Arial, sans-serif;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+
+            color: #333;
+
+            background-image: radial-gradient(ellipse at top right, #DD4814 1%, rgba(0, 0, 0, 0)),
+                radial-gradient(#5E2750, #77216F);
+            background-attachment: fixed;
+        }
+        body {
             margin: 0;
         }
 
-        #paragraphTarget {
-            background-color: black;
+        html, body, body > output {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        output {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transform: scale(4);
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
             color: white;
-            width: 1em;
+
+            cursor: default;
         }
 
-        #paragraphPreview {
-            background-color: #eee;
-            color: black;
+        output i {
+            font-size: 10px;
+            font-style: normal;
+            opacity: .5;
+            text-align: center;
         }
 
+        output > div {
+            display: flex;
+            flex-direction: column;
 
-        #fieldsetPreview:before,
-        #fieldsetPreview:after {
-            content: '';
-            display: block;
-            background:rgba(0, 0, 0, 0.125);
-            height:40px;
+        }
+
+        #preview {
             position: relative;
-            z-index: 2;
+            background:rgba(0, 0, 0, .125);
+        }
+
+        #previewBackground {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top:25px;
+            height: 20px;
+            background:rgba(0, 0, 0, .125);
+        }
+
+        #marginLeft {
+            margin-left: -3em;
+            margin-right: .5em
+        }
+
+        #formSettings {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            overflow: hidden;
+        }
+
+        input,
+        select {
+            float: left;
+            margin: 0;
+            border: none;
+            background-color: white;
+            outline: none;
+            box-sizing: border-box;
+            width: 20%;
+            font-size: 2em;
+            padding: 0 .5em;
+        }
+
+        input:hover,
+        input:focus,
+        select:hover,
+        select:focus {
+            background-color: #f7f7f7;
+        }
+
+        input[type="submit"] {
+            background-color: #77216F;
+            color: white;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #5E2750;
+        }
+
+        input[type="submit"]:active {
+            background-color: #2C001E;
+        }
+
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+        }
+
+        select {
+            margin-bottom: -2px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Font Ruler <small>Measure font ascent and descent height</small></h1>
-    </header>
+    <output>
+        <i id="marginLeft" title="margin left">0px</i>
+        <div>
+            <i id="marginTop" title="margin top">0px</i>
+            <div id="preview">Preview<div id="previewBackground"></div></div>
+            <i id="marginBottom" title="margin bottom">0px</i>
+        </div>
+    </output>
 
     <form id="formSettings">
-        <fieldset>
-            <legend>Settings</legend>
-
-            <label for="selectFontWeight">Font weight</label>
-            <select id="selectFontWeight"  tabindex="4">
-                <option value="bold">bold</option>
-                <option value="bolder">bolder</option>
-                <option value="lighter">lighter</option>
-                <option value="normal" selected>normal</option>
-                <option value="100">100</option>
-                <option value="200">200</option>
-                <option value="300">300</option>
-                <option value="400">400</option>
-                <option value="500">500</option>
-                <option value="600">600</option>
-                <option value="700">700</option>
-                <option value="800">800</option>
-                <option value="900">900</option>
-            </select>
-
-            <label for="inputFontSize">Font size</label>
-            <input type="text" id="inputFontSize" value="16px" placeholder="16px" tabindex="1" autofocus required>
-
-            <label for="inputLineHeight">Line height</label>
-            <input type="text" id="inputLineHeight" value="1.4" placeholder="1.4" tabindex="2" required>
-
-            <label for="inputFontFamily">Font family</label>
-            <input list="datalistFontFamilies" type="text" id="inputFontFamily" value="Arial" placeholder="Arial" tabindex="3" required>
-
-            <input type="submit" value="Submit"  tabindex="5">
-
-        </fieldset>
+        <select id="selectFontWeight"  tabindex="4" title="font weight">
+            <option value="bold">bold</option>
+            <option value="bolder">bolder</option>
+            <option value="lighter">lighter</option>
+            <option value="normal" selected>normal</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+        </select>
+        <input type="text" id="inputFontSize" value="16px" placeholder="16px" tabindex="1" title="font size" autofocus required>
+        <input type="text" id="inputLineHeight" value="1.4" placeholder="1.4" tabindex="2" title="line height" required>
+        <input list="datalistFontFamilies" type="text" id="inputFontFamily" value="Arial" title="font family" placeholder="Arial" tabindex="3" required>
+        <input type="submit" value="Submit"  tabindex="5">
     </form>
 
-    <fieldset id="fieldsetResult">
-        <legend>Result</legend>
-
-        <label for="outputMarginLeft">Margin left</label>
-        <output id="outputMarginLeft">-1px</output>
-
-        <label for="outputMarginTop">Margin top</label>
-        <output id="outputMarginTop">-18px</output>
-
-        <label for="outputMarginBottom">Margin bottom</label>
-        <output id="outputMarginBottom">-18px</output>
-    </fieldset>
-
-    <fieldset id="fieldsetPreview">
-        <legend>Preview</legend>
-        <p id="paragraphPreview">Preview</p>
-    </fieldset>
-
-    <fieldset id="fieldsetHtml">
-        <legend>HTML</legend>
-        <p id="paragraphTarget">E</p>
-    </fieldset>
-
-    <fieldset id="fieldsetCanvas">
-        <legend>Canvas</legend>
-    </fieldset>
-
-    <article>
-        <p>There is <a href="#targetParagraph">target paragraph</a> wich is rendered to <a href="#fieldsetCanvas">canvas</a> with applied <a href="#formSettings">settings</a> (<a href="http://html2canvas.hertzen.com/" target="_blank">html2canvas</a> library used).</p>
-        <p>After rendering canvas we iterating through all points looking for mininum and maximum coordinates where colors are changed from black to white.</p>
-        <p>After that we can calculate ascend and descend sizes for current font.</p>
-        <p><a href="render-html-to-canvas.html">Example of rendering html into canvas</a> and <a href="canvas-get-point-color.html">finding point color</a></p>
-        <p><a href="fontruler.html">Font ruler</a> without form and its <a href="fontruler.js">source</a>.</p>
-    </article>
 
     <datalist id="datalistFontFamilies">
         <option value="Andale Mono">
@@ -173,19 +224,11 @@
         <option value="Verdana">
     </datalist>
 
-
     <script src="http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
     <script src="fontruler.js"></script>
     <script>
-        var formSettings = document.getElementById('formSettings'),
-            selectFontWeight = document.getElementById('selectFontWeight'),
-            inputFontSize = document.getElementById('inputFontSize'),
-            inputLineHeight = document.getElementById('inputLineHeight'),
-            inputFontFamily = document.getElementById('inputFontFamily'),
-            paragraphTarget = document.getElementById('paragraphTarget'),
-            paragraphPreview = document.getElementById('paragraphPreview'),
-            datalistFontFamilies = document.getElementById('datalistFontFamilies'),
+        var datalistFontFamilies = document.getElementById('datalistFontFamilies'),
             key = 'AIzaSyAgaE5PTKLozvjkyseLxKdQfxRTtrGxbnQ',
             googleFonts = [];
 
@@ -213,7 +256,18 @@
                 WebFont.load({google: {families: [this.value]}});
             }
         });
-
+    </script>
+    <script>
+        var formSettings = document.getElementById('formSettings'),
+            selectFontWeight = document.getElementById('selectFontWeight'),
+            inputFontSize = document.getElementById('inputFontSize'),
+            inputLineHeight = document.getElementById('inputLineHeight'),
+            inputFontFamily = document.getElementById('inputFontFamily'),
+            elMarginTop = document.getElementById('marginTop'),
+            elMarginBottom = document.getElementById('marginBottom'),
+            elMarginLeft = document.getElementById('marginLeft'),
+            preview = document.getElementById('preview')
+            previewBackground = document.getElementById('previewBackground');
 
         formSettings.addEventListener('submit', function(event){
             event.preventDefault();
@@ -222,33 +276,39 @@
 
         // Main function
         function main() {
-            // Update target paragraph styles
-            paragraphTarget.style.fontWeight = selectFontWeight.value;
-            paragraphTarget.style.fontSize = inputFontSize.value;
-            paragraphTarget.style.lineHeight = inputLineHeight.value;
-            paragraphTarget.style.fontFamily = inputFontFamily.value;
+            preview.style.fontWeight = selectFontWeight.value;
+            preview.style.fontSize = inputFontSize.value;
+            preview.style.lineHeight = inputLineHeight.value;
+            preview.style.fontFamily = inputFontFamily.value;
 
-            // Update preview paragraph styles
-            paragraphPreview.style.fontWeight = selectFontWeight.value;
-            paragraphPreview.style.fontSize = inputFontSize.value;
-            paragraphPreview.style.lineHeight = inputLineHeight.value;
-            paragraphPreview.style.fontFamily = inputFontFamily.value;
+            var div = document.createElement('DIV');
+            div.style.fontWeight = selectFontWeight.value;
+            div.style.fontSize = inputFontSize.value;
+            div.style.lineHeight = inputLineHeight.value;
+            div.style.fontFamily = inputFontFamily.value;
+            div.style.backgroundColor = 'black';
+            div.style.color = 'white';
+            div.style.padding = 0;
+            div.style.margin = 0;
+            div.style.width = '1em';
+            div.innerHTML = 'E';
+            div.style.position = 'absolute';
+            div.style.left = 0;
+            div.style.bottom = 0;
+            document.body.appendChild(div);
 
             // Render target paragraph to canvas
-            fontruler(paragraphTarget, function(minX, minY, maxX, maxY, marginLeft, marginTop, marginBottom, canvas){
-                // Show rendered canvas
-                document.getElementById('fieldsetCanvas').innerHTML = '<legend>Canvas</legend>';
-                document.getElementById('fieldsetCanvas').appendChild(canvas);
+            fontruler(div, function(minX, minY, maxX, maxY, marginLeft, marginTop, marginBottom, canvas){
+                elMarginLeft.innerHTML = marginLeft + 'px';
+                elMarginTop.innerHTML = marginTop + 'px';
+                elMarginBottom.innerHTML = marginBottom + 'px';
 
-                // Update output results
-                document.getElementById('outputMarginLeft').innerHTML = marginLeft + 'px';
-                document.getElementById('outputMarginTop').innerHTML = marginTop + 'px';
-                document.getElementById('outputMarginBottom').innerHTML = marginBottom + 'px';
+                previewBackground.style.left = minX + 'px';
+                previewBackground.style.top = minY + 'px';
+                previewBackground.style.height = (maxY - minY) + 'px';
 
-                // Update preview paragraph styles
-                paragraphPreview.style.marginLeft = marginLeft + 'px';
-                paragraphPreview.style.marginTop = marginTop + 'px';
-                paragraphPreview.style.marginBottom = marginBottom + 'px';
+
+                div.parentNode.removeChild(div);
 
                 console.table([{
                     'min x (px)': minX,
@@ -260,6 +320,8 @@
                     'margin bottom (px)': marginBottom
                 }]);
             });
+
+
         }
 
         main();
