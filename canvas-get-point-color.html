@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Get Point Color</title>
+</head>
+<body>
+    <canvas id="canvas" width="100" height="100"></canvas>
+    <table>
+        <caption>Move your mouse pointer over canvas</caption>
+        <tr><th>red</th><td id="red">0</td></tr>
+        <tr><th>green</th><td id="green">0</td></tr>
+        <tr><th>blue</th><td id="blue">0</td></tr>
+        <tr><th>alpha</th><td id="alpha">0</td></tr>
+    </table>
+
+    <script>
+        var canvas = document.getElementById('canvas'),
+            width = canvas.width,
+            height = canvas.height,
+            halfWidth = width / 2,
+            halfHeight = height / 2,
+            context = canvas.getContext('2d'),
+            red = document.getElementById('red'),
+            green = document.getElementById('green'),
+            blue = document.getElementById('blue'),
+            alpha = document.getElementById('alpha');
+
+        context.beginPath();
+        context.rect(0, 0, halfWidth, halfHeight);
+        context.fillStyle = 'red';
+        context.fill();
+
+        context.beginPath();
+        context.rect(halfWidth, 0, halfWidth, halfHeight);
+        context.fillStyle = 'green';
+        context.fill();
+
+        context.beginPath();
+        context.rect(0, halfHeight, halfWidth, halfHeight);
+        context.fillStyle = 'blue';
+        context.fill();
+
+        context.beginPath();
+        context.rect(halfWidth, halfHeight, halfWidth, halfHeight);
+        context.fillStyle = 'yellow';
+        context.fill();
+
+        canvas.addEventListener('mousemove', function(event){
+            var x = event.clientX - canvas.offsetLeft,
+                y = event.clientY - canvas.offsetTop,
+                data = context.getImageData(x, y, 1, 1).data;
+
+            red.innerHTML = data[0];
+            green.innerHTML = data[1];
+            blue.innerHTML = data[2];
+            alpha.innerHTML = data[3];
+        });
+    </script>
+</body>
+</html>

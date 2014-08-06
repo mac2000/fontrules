@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML2Canvas</title>
+    <style>
+        p {
+            background:black;
+            color:white;
+            font:normal 16px/3 Arial;
+            width: 1em;
+            margin: 0;
+        }
+
+        div {
+            background:rgba(0, 0, 0, .125);
+            height:20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        #preview {
+            background:rgba(0, 0, 0, .125);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <p id="target">E</p>
+    <div></div>
+    <p id="preview">E</p>
+    <div></div>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="fontruler.js"></script>
+    <script>
+        fontruler(document.getElementById('target'), function(minX, minY, maxX, maxY, marginLeft, marginTop, marginBottom, canvas){
+            document.body.appendChild(canvas);
+
+            document.getElementById('preview').style.marginLeft = marginLeft + 'px';
+            document.getElementById('preview').style.marginTop = marginTop + 'px';
+            document.getElementById('preview').style.marginBottom = marginBottom + 'px';
+
+            console.table([{
+                'min x (px)': minX,
+                'min y (px)': minY,
+                'max x (px)': maxX,
+                'max y (px)': maxY,
+                'margin left (px)': marginLeft,
+                'margin top (px)': marginTop,
+                'margin bottom (px)': marginBottom
+            }]);
+        });
+    </script>
+</body>
+</html>

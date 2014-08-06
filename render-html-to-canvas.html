@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Render HTML to Canvas</title>
+</head>
+<body>
+    <canvas width="50" height="50"></canvas>
+
+    <script>
+        var canvas = document.querySelector('canvas');
+        var context = canvas.getContext('2d');
+
+        var data   = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50">' +
+               '<foreignObject width="100%" height="100%">' +
+                 '<div xmlns="http://www.w3.org/1999/xhtml" style="font:normal 16px/2 Arial;color:white;background:black">E</div>' +
+               '</foreignObject>' +
+             '</svg>';
+
+        var DOMURL = window.URL || window.webkitURL || window;
+
+        var img = new Image();
+        var svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+        var url = DOMURL.createObjectURL(svg);
+
+        img.onload = function () {
+            context.drawImage(img, 0, 0);
+            DOMURL.revokeObjectURL(url);
+        }
+
+        img.src = url;
+    </script>
+</body>
+</html>
