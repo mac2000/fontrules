@@ -94,7 +94,7 @@
             box-sizing: border-box;
             width: 20%;
             font-size: 2em;
-            padding: 0 .5em;
+            padding: .5em;
         }
 
         input:hover,
@@ -152,9 +152,9 @@
             <option value="800">800</option>
             <option value="900">900</option>
         </select>
-        <input type="text" id="inputFontSize" value="16px" placeholder="16px" tabindex="1" title="font size" autofocus required>
-        <input type="text" id="inputLineHeight" value="1.4" placeholder="1.4" tabindex="2" title="line height" required>
-        <input list="datalistFontFamilies" type="text" id="inputFontFamily" value="Arial" title="font family" placeholder="Arial" tabindex="3" required>
+        <input type="text" id="inputFontSize" value="24px" placeholder="24px" tabindex="1" title="font size" autofocus required>
+        <input type="text" id="inputLineHeight" value="2" placeholder="2" tabindex="2" title="line height" required>
+        <input list="datalistFontFamilies" type="text" id="inputFontFamily" value="Ubuntu" title="font family" placeholder="Ubuntu" tabindex="3" required>
         <input type="submit" value="Submit"  tabindex="5">
     </form>
 
@@ -256,6 +256,8 @@
                 WebFont.load({google: {families: [this.value]}});
             }
         });
+
+        WebFont.load({google: {families: ['Ubuntu']}});
     </script>
     <script>
         var formSettings = document.getElementById('formSettings'),
